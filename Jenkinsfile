@@ -1,18 +1,18 @@
 pipeline {
     agent any 
     environment {
-    DOCKERHUB_CREDENTIALS = credentials('docker-jenkins')
+    DOCKERHUB_CREDENTIALS = credentials('docker-hub-cred')
     }
     stages { 
         stage('SCM Checkout') {
             steps{
-            git 'https://github.com/prakash6333/docker-nodejs.git'
+            git 'https://github.com/sunil-th/docker-011.git'
             }
         }
 
         stage('Build docker image') {
             steps {  
-                sh 'docker build -t prakash6333/nodeapp:$BUILD_NUMBER .'
+                sh 'docker build -t sunildev99/docker-01:$BUILD_NUMBER .'
             }
         }
         stage('login to dockerhub') {
@@ -22,7 +22,7 @@ pipeline {
         }
         stage('push image') {
             steps{
-                sh 'docker push prakash6333/nodeapp:$BUILD_NUMBER'
+                sh 'docker push sunildev99/docker-01:$BUILD_NUMBER'
             }
         }
 }
